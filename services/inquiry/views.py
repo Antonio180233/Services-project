@@ -19,16 +19,16 @@ def inquirys(request):
             user_id  = request.user.id
             has_inquired = inquiry.objects.all().filter(listing_id=listing_id, user_id=user_id)
             if has_inquired:
-                messages.error(request, 'Ya ha realizado una solicitud para este servicio.')
+                messages.error(request, 'You have already made an inquiry for this listing')
                 return redirect('/listings/'+listing_id+'/')
             inquirys1 = inquiry(listing=listing, listing_id=listing_id, name=name, email=email, phone=phone, message=message, user_id=user_id, owner_id=owner_id)
             inquirys1.save()
             send_mail(
-                'Solicitud de '+ listing,
-                'Ha habido una solicitud para '+ listing +'.Inicie sesion para obtener mas informacion',
-                'correo@gmail.com',
+                'Solicitud para '+ listing,
+                'Hay una solicitud para la publicacion '+ listing +'. Inicia sesion para ver mas detalles',
+                'diamondsoftwaresolutions4@gmail.com',
                 [owner_mail],
                 fail_silently=False
             )
-            messages.success(request, "Su solicitud ha sido realizada, el propietario de la publicación se comunicará con usted lo antes posible")
+            messages.success(request, "Tu solicitud ha sido enviada al proveedor, obtendras una respuesta pronto")
             return redirect('/listings/'+listing_id+'/')

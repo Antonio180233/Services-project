@@ -7,8 +7,8 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4"> {{request.user.first_name}}'s Dashboard</h1>
-          <p class="lead">Administrar listados/consultas de BS</p>
+          <h1 class="display-4"> Tablero de {{request.user.nombre}}</h1>
+          <p class="lead">Administra tus publicaciones, solicitudes y más</p>
           {% include 'partials/_alerts.html' %}
 
         </div>
@@ -35,9 +35,9 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Welcome {{request.user.first_name}} {{request.user.last_name}}</h2>
+          <h2>Bienvenido {{request.user.nombre}} {{request.user.apellidoP}}</h2>
           {% include 'partials/_dashnav.html'%}
-          <p>Aqui están tus consultas</p>
+          <p><b>Aquí están tus publicaciones</b></p>
           <hr>
           {% if listings %}
           <table class="table">
@@ -54,10 +54,11 @@
                 <td>{{listing.category}}</td>
                 <td>{{listing.title}}</td>
                 <td>
-                  <a class="btn btn-light" href="{% url 'listing' listing.id%}">Ver Listas</a>
-                  <a class="btn btn-outline-warning" href="{% url 'update' listing.id%}">Actualizar</a>
+                  <a class="btn btn-secondary" href="{% url 'listing' listing.id%}">Ver publicaciones</a>
+                  <a class="btn btn-outline-warning" href="{% url 'update' listing.id %}">Actualizar</a>
                   <a class="btn btn-outline-danger" onclick="$('#delete').click()">Eliminar</a>
-                  <form style="display: none;" method="POST" action="{% url 'delete' listing.id%}">
+                  
+                  <form style="display: none;" method="POST" action="{% url 'delete' listing.id %}">
                     {% csrf_token%}
                     <button type="submit" class="btn btn-outline-danger" id="delete">Eliminar</button>
                   </form>
@@ -68,8 +69,8 @@
             </tbody>
           </table>
           {%else%}
-          <p>No has creado ninguna lista</p>
-          <button class='btn btn-primary'>Crear nueva lista</button>
+          <p>No has creado ninguna publicación</p>
+          <button class='btn btn-primary'>Crear nueva publicación</button>
           {%endif%}
         </div>
       </div>

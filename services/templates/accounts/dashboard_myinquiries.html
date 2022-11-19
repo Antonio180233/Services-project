@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title%} DashBoard {% endblock%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4"> Tablero de {{request.user.nombre}}</h1>
+          <p class="lead">Administra tus publicaciones, solicitudes y más</p>
+          {% include 'partials/_alerts.html' %}
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index'%}">
+              <i class="fas fa-home"></i> Inicio</a>
+          </li>
+          <li class="breadcrumb-item active"> Tablero</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Bienvenido {{request.user.nombre}} {{request.user.apellidoP}}</h2>
+          {% include 'partials/_dashnav.html'%}
+          <p><b>Aquí están tus solicitudes</b></p>
+          <hr>
+          {% if myinquiries %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Publicacion</th>
+                
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for inquiry in myinquiries %}
+              <tr>
+                
+                <td>{{inquiry.listing}}</td>
+                <td>
+                  
+                  <a class="btn btn-light" href="{% url 'listing' inquiry.listing_id %}">Ver publicación</a>
+                 
+                    {% csrf_token%}
+                 
+                 
+
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {%else%}
+          <p>No has hecho ninguna solicitud</p>
+          <button class='btn btn-primary' href="{% url 'listing' inquiry.listing_id%}">Ver publicaciones</button>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+{%endblock%}

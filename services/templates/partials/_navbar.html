@@ -45,9 +45,9 @@
             class="nav-item mr-3"
           {% endif%}
           >
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{% url 'dashboard' %}">
               <!--% url 'dashboard' % va en el href-->
-              <i class="fas fa-user-plus"></i> {{request.user.nombre}}, {{request.user.apellidoP}}</a>
+              <i class="fas fa-user-plus"></i>Tablero de {{request.user.nombre}}, {{request.user.apellidoP}}</a>
           </li>
         <li class="nav-item mr-3">
           <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">
