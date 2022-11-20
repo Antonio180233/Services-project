@@ -12,6 +12,8 @@ class Listing(models.Model):
     zipcode = models.CharField(max_length=20)
     description = models.TextField(blank=True)
     price = models.IntegerField(default=100)
+    total_rating = models.IntegerField(null=True)
+    no_of_rating = models.IntegerField(null=True)
 
     photo_main = models.ImageField(upload_to='photos/%Y/%m/%d/')
     photo_1 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)

@@ -16,6 +16,7 @@
 
   <!-- Breadcrumb -->
   <section id="bc" class="mt-3">
+    {% include 'partials/_alerts.html' %}
     <div class="container">
       <nav>
         <ol class="breadcrumb">
@@ -96,9 +97,18 @@
                   <i class="fas fa-list"></i> Categoría
                   <span class="float-right">{{listing.category}}</span>
                 </li>
-              
-               
-              
+                <li class="list-group-item text-dark">
+                  <i class="fas fa-list"></i> Calificacion: 
+                  {%if current_rating%}
+                    <span class="float-right">{{current_rating}}</span>
+                  {%else%}
+                    <p>No cuenta con calificaciones</p>
+                  {%endif%}
+                  <li class="list-group-item text-dark">
+                    <i class="fas fa-list"></i> Total de votos:
+                    <span class="float-right">{{tRating}}</span>
+                  </li>
+                </li>
             </div>
             <div class="col-md-6">
               
@@ -143,6 +153,22 @@
                 <input type="hidden" name="favourite_val" value="favourite">
                 <button class="btn-success btn-block btn-lg" type="submit">Agregar a favoritos</button>
               {%endif%}
+            </form>
+          {%endif%}
+          <br>
+          {%if rate%}
+            <form action="{%url 'listing' listing.id%}" method="POST">
+              {%csrf_token%}
+              <div style="display: flex;">
+                <input  name="my_rating" required placeholder="valor de 1-10" class="form-control">
+                <button class="btn btn-primary" type="submit">Calificar</button>
+              </div>
+          {%else%}
+              {%if request.user.is_authenticated%}
+                <p>Ya calificaste este servicio</p>
+              {%else%}
+                <p>Es necesario iniciar sesion para calificar</p>
+            {%endif%}
             </form>
           {%endif%}
         </div>

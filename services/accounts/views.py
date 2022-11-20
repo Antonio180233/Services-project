@@ -32,10 +32,7 @@ def register(request):
         direccion = request.POST['direccion']
         password = request.POST['password']
         password2 = request.POST['password2']
-        tipoCuenta = request.POST['tipoCuenta']
 
-        if tipoCuenta=="on":
-            estado = True
 
         user = User
 
@@ -48,7 +45,6 @@ def register(request):
             'telefono': telefono,
             'direccion': direccion,
             'password': password,
-            'tipoCuenta': estado,
         }
 
         if password == password2:
@@ -92,7 +88,7 @@ def confirmregister(request):
         direccion = request.POST['direccion']
         password = request.POST['password']
         confirmcode = request.POST['confirmcode']
-        tipoCuenta = estado
+      
         user = User
 
         context = {
@@ -104,11 +100,11 @@ def confirmregister(request):
             'telefono': telefono,
             'direccion': direccion,
             'password': password,
-            'tipoCuenta': tipoCuenta,
+           
         }
         if code == confirmcode:
             user = user.objects.create_user(username=username, email=email, password=password,
-            telefono=telefono,nombre=nombre, apellidoP=apellidoP, apellidoM=apellidoM, direccion=direccion, tipoCuenta=tipoCuenta)
+            telefono=telefono,nombre=nombre, apellidoP=apellidoP, apellidoM=apellidoM, direccion=direccion)
             user.save()
             login(request, user)
             messages.success(request, 'Inicio de sesion exitoso')
