@@ -174,7 +174,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 
     # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
+    #'allauth.account.auth_backends.AuthenticationBackend',
     
 ]
 #668449700605-fcrk48jsp1rmtko99cssqpnbhbg1bmr0.apps.googleusercontent.com

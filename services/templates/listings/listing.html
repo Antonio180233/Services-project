@@ -131,7 +131,20 @@
           </div>
         </div>
         <div class="col-md-3">
-         <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Solicitar servicio</button>
+          <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
+          <br>
+          {%if request.user.is_authenticated%}
+            <form action="{%url 'listing' listing.id%}" method="POST">
+              {%csrf_token%}
+              {%if favourite%}
+                <input type="hidden" name="favourite_val" value="unfavourite">
+                <button class="btn-danger btn-block btn-lg" type="submit">Eliminar de favoritos</button>
+              {%else%}
+                <input type="hidden" name="favourite_val" value="favourite">
+                <button class="btn-success btn-block btn-lg" type="submit">Agregar a favoritos</button>
+              {%endif%}
+            </form>
+          {%endif%}
         </div>
       </div>
     </div>

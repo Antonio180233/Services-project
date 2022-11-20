@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title%} DashBoard {% endblock%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4"> Tablero de {{request.user.nombre}}</h1>
+          <p class="lead">Administra tus publicaciones, solicitudes y más</p>
+          {% include 'partials/_alerts.html' %}
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index'%}">
+              <i class="fas fa-home"></i> Inicio</a>
+          </li>
+          <li class="breadcrumb-item active"> Tablero</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Bienvenido {{request.user.nombre}} {{request.user.apellidoP}}</h2>
+          {% include 'partials/_dashnav.html'%}
+          <p><b>Aquí están tus favoritos</b></p>
+          <hr>
+          {% if listings %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Categoria</th>
+                <th scope="col">Titulo</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for listing in listings %}
+              <tr>
+                <td>{{listing.category}}</td>
+                <td>{{listing.title}}</td>
+                <td>
+                  <a class="btn btn-secondary" href="{% url 'listing' listing.id%}">Ver publicaciones</a>
+
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {%else%}
+          <p>No cuentas con ningun favorito</p>
+          <button class='btn btn-primary'>Crear nueva publicación</button>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+{%endblock%}

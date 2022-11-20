@@ -17,9 +17,28 @@ def listings(request):
     return render(request, 'listings/listings.html', context)
 
 def listing(request, pk):
+    favourite = False
     listing = get_object_or_404(Listing, pk=pk)
+    favourites = str(request.user.favourites)
+    favourites = favourites.split(',')
+    if request.method== "POST":
+        if 'favourite_val' in request.POST:
+            favourite_val = request.POST['favourite_val']
+            if favourite_val == 'unfavourite':
+                if str(pk) in favourites:
+                    favourites.remove(str(pk))
+            if favourite_val == 'favourite':
+                if str(pk) not in favourites:
+                    favourites.append(str(pk))
+            request.user.favourites = ','.join(favourites)
+            request.user.save()
+
+    if str(pk) in favourites:
+         favourite = True
+
     context = {
-        'listing': listing
+        'listing': listing,
+        'favourite': favourite
     }
     return render(request,'listings/listing.html', context)
 

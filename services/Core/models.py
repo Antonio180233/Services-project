@@ -33,7 +33,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     fechaDeNacimiento = models.DateField
     password = models.CharField(max_length=100)
     telefono = models.BigIntegerField(default=0)
-    tipoCuenta = models.BooleanField(default=False)#Borrar este campo 
+    favourites = models.CharField(max_length=200,default='')
+    tipoCuenta = models.BooleanField(default=False)#Borrar este campo p
     direccion = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

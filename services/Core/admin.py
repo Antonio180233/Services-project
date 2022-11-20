@@ -12,7 +12,7 @@ class UserAdmin(BaseUser):
     list_display_links = ['id', 'username']
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
-        (_('Info personal'),{'fields': ('nombre','apellidoP','apellidoM','telefono','direccion','tipoCuenta')}),#borrar tipo de cuenta
+        (_('Info personal'),{'fields': ('nombre','apellidoP','apellidoM','telefono','direccion','favourites')}),#borrar tipo de cuenta
         (_('Permisos'), {'fields': ('is_active','is_staff','is_superuser')})
     )
     add_fieldsets = [
