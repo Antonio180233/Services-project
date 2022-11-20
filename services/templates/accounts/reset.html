@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+{% block title %} Reset Password {% endblock%}
+{% block content %}
+{% load crispy_forms_tags %}
+<style>
+    #id_email{
+        width: 500px;
+
+    }
+    .reset-password-container{
+        margin-top: 10vh;
+        height: 70vh;
+    }
+</style>
+<div class="container reset-password-container">
+    <h1>¿Olvidaste tu contraseña?</h1>
+    <br>
+    <p>Ingrese su dirección de correo electrónico a continuación, y nuestro sitio le enviará por correo electrónico las instrucciones para cambiar la contraseña.</p>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Reset" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}
