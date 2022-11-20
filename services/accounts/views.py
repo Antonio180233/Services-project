@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.core.mail import send_mail
+from django.contrib.auth.hashers import check_password
 from inquiry.models import inquiry
 
 
@@ -164,4 +165,27 @@ def inquiry1(request):
     }
     return render(request, 'accounts/dashboard_inquiries.html', context)
 
+@login_required
+@login_required
+def change_password(request):
+    if request.method=='POST':
+        user = request.user
+        currentpassword = request.POST['currentpassword']
+        if not check_password(currentpassword,user.password):
+            messages.error(request,'Contraseña actual incorrecta')
+            return redirect('dashboard')
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
 
+        if password1 == password2:
+            user.set_password(password1)
+            user.save()
+            messages.success(request,'Se ha cerrado la sesión')
+            messages.success(request,'Ha cambiado correctamente la contraseña')
+            messages.success(request,'Use su nueva contraseña para iniciar sesión')
+        else:
+            messages.error(request,'Passwords do not match')
+        return redirect('dashboard')
+    
+    else:
+        return render(request,'accounts/change_password.html')
