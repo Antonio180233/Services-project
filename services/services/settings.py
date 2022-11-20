@@ -194,7 +194,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'dashboard'
 #LOGIN_REDIRECT_URL = 'login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #{% provider_login_url provider.id openid=brand.openid_url process=process %}
@@ -204,7 +204,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 SITE_ID = 1
 
 
-ACCOUNT_LOGOUT_REDIRECT_URL = 'account:login'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 
 ACCOUNT_EMAIL_REQUIRED = True
 
