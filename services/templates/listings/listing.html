@@ -174,7 +174,34 @@
         </div>
       </div>
     </div>
+    <!--Comentarios-->
+    <div class="row mb-5">
+      <div class="col-md-12">
+        <h2>Comentarios...</h2>
+        <form action="{%url 'comment' listing.id%}" method="POST">
+          {%csrf_token%}
+          <input type="hidden"  name="comentario"  class="form-control">
+          <button class="btn btn-primary" type="submit">Comentar</button>
+        </form>
+        <br/><br/>
+        {% if not listing.comments.all %}
+          No hay comentarios en la publicacion
+          <a href="{% url 'comment'  listing.id%}">Agrega un comentario</a>
+        {%else%}
+          {%for comment in listing.comments.all %}
+            <strong>
+              {{comment.name}} -
+              {{comment.date}}
+            </strong>
+            <br/>
+            {{comment.body}}
+            <br/><br/>
+          {%endfor%}
+        {%endif%}
+      </div>
+    </div>
   </section>
+  
     <!-- cambiar por plugin de pagos-->
   <!-- Inquiry Modal -->
   <div class="modal fade" id="inquiryModal" role="dialog">

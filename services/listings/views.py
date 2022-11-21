@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Listing
+from .models import Listing, Comment
 from django.core.paginator import Paginator, EmptyPage
 from .choices import price_choices, category_choices
 from django.contrib.auth.decorators import login_required
-from .forms import ListingForm, UpdateForm
+from .forms import ListingForm, UpdateForm, commentForm
+from django.views.generic import CreateView
 
 def listings(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)
@@ -136,3 +137,19 @@ def delete_listing(request, pk):
     if request.method=="POST":
         listing.delete()
         return redirect('dashboard')
+
+@login_required
+def comments(request,pk):
+    listing = get_object_or_404(Comment,pk=pk)
+    context = {
+        'form': commentForm(instance=listing),
+        'pk':pk
+    }
+    if request.method == 'POST':
+        form = commentForm(request.POST,instance=listing)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('listings')
+        else:
+            return render(request,'listings/comment.html',context)
