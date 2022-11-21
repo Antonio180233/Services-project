@@ -44,7 +44,8 @@ Publicaciones = {
     "Informacion": servicios_info
 }
 #Genera el archivo CSV
-df = pd.DataFrame.from_dict(Publicaciones, orient='index')
+#df = pd.DataFrame.from_dict(Publicaciones, orient='index')
+df = pd.DataFrame(Publicaciones)
 df.to_csv("Publicaciones.csv")
 
 
