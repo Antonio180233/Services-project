@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Listing
+from .models import Listing , Comment
 
 class ListAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'owner', 'category', 'price', 'is_published', 'list_date')
@@ -9,3 +9,4 @@ class ListAdmin(admin.ModelAdmin):
     list_per_page = 30
 
 admin.site.register(Listing, ListAdmin)
+admin.site.register(Comment)

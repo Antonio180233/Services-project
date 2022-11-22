@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Listing
+from .models import Listing, Comment
 from django.core.paginator import Paginator, EmptyPage
 from .choices import price_choices, category_choices
 from django.contrib.auth.decorators import login_required
-from .forms import ListingForm, UpdateForm
+from .forms import ListingForm, UpdateForm, CommentForm
+from django.views.generic import CreateView
 
 def listings(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)
@@ -41,16 +42,16 @@ def listing(request, pk):
 
             if 'my_rating' in request.POST:
                 my_rating = request.POST['my_rating']
-                if int(my_rating)>10 or int(my_rating<0):
+                if int(my_rating)>10 or int(my_rating) <0:
                     messages.error(request,'Ingresar un valor de 0 a 10')
-                elif str(pk) not in rate_listing:
+                elif (str(pk)) not in rate_listing:
                     if listing.total_rating:
                         listing.total_rating += int(request.POST['my_rating'])
                         listing.no_of_rating += 1
                     else:
                         listing.total_rating = int(request.POST['my_rating'])
                         listing.no_of_rating = 1
-                    rate_listing.append(str(pk))
+                    rate_listing.append (str(pk))
                     request.user.rate_listing = ','.join(rate_listing)
                     request.user.save()
                     listing.save()
@@ -106,7 +107,8 @@ def create(request):
             new.save()
             return redirect('dashboard')
         else:
-            pass
+            return render(request, 'listings/create.html', {'form': form})
+            
     else:
         return render(request,'listings/create.html',{'form': ListingForm()})
 
@@ -136,3 +138,19 @@ def delete_listing(request, pk):
     if request.method=="POST":
         listing.delete()
         return redirect('dashboard')
+
+@login_required
+def comments(request,pk):
+    listing = get_object_or_404(Comment,pk=pk)
+    context = {
+        'form': CommentForm(instance=listing),
+        'pk':pk
+    }
+    if request.method == 'POST':
+        form = CommentForm(request.POST,instance=listing)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('listings')
+        else:
+            return render(request,'listings/comment.html',context)
