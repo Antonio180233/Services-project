@@ -19,7 +19,7 @@ def inquirys(request):
             user_id  = request.user.id
             has_inquired = inquiry.objects.all().filter(listing_id=listing_id, user_id=user_id)
             if has_inquired:
-                messages.error(request, 'You have already made an inquiry for this listing')
+                messages.error(request, 'Ya hiciste una solicitud para este servicio')
                 return redirect('/listings/'+listing_id+'/')
             inquirys1 = inquiry(listing=listing, listing_id=listing_id, name=name, email=email, phone=phone, message=message, user_id=user_id, owner_id=owner_id)
             inquirys1.save()

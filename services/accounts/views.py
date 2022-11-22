@@ -174,6 +174,24 @@ def inquiry1(request):
     return render(request, 'accounts/dashboard_inquiries.html', context)
 
 @login_required
+def send_reply(request):
+    if request.method =="POST":
+        email = request.POST['email']
+        message = request.POST['message']
+        lisiting = request.POST['listing']
+        send_mail(
+            'Reply from ' + lisiting + ' owner',
+            message,
+            'diamondsoftwaresolutions4@gmail.com',
+            [email],
+            fail_silently=False
+        )
+        messages.success(request, 'Tu contestacion fue exitosa')
+        return redirect('inquiry1')
+    else:
+        return redirect('dashboard')
+
+
 @login_required
 def change_password(request):
     if request.method=='POST':

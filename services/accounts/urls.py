@@ -11,6 +11,7 @@ urlpatterns = [
     path('dashboard/favourites', views.favourite_listing, name='favourites'),
     path('dashboard/myinquiries', views.myinquiries, name='myinquiries'),
     path('dashboard/inquiry', views.inquiry1, name='inquiry1'),
+    path('dashboard/send_reply', views.send_reply, name="send_reply"),
     path('change_password/',views.change_password,name='change_password'),
     path('reset_password/',auth_views.PasswordResetView.as_view(template_name='accounts/reset.html'),name='password_reset'),
     path('reset_password/done/',auth_views.PasswordResetCompleteView.as_view(template_name='accounts/reset_done.html'),name='password_reset_done'),

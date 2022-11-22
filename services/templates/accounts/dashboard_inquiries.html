@@ -108,7 +108,7 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form action="{}" method="POST">
+                      <form action="{% url 'send_reply' %}" method="POST">
                         {% csrf_token%}
                         <div class="form-group">
                           <label for="property_name" class="col-form-label">Item:</label>
