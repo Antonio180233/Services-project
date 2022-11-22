@@ -19,13 +19,13 @@
                   <select name="state" class="form-control">
                     <label class="sr-only">Cátalogo</label>
                   <option selected="true" disabled="disabled">Cátalogo (Todos)</option>
-                  {% for key,value in category_choices.items %}
+                  {% for key,value in CATEGORY_CHOICES.category %}
                   <option value="{{key}}"
                   {% if key == values.category %}
                   selected
                   {% endif %}
                   >{{value}}</option>
-                    {%endfor%}
+                  {%endfor%}
 
                 </select>
               </div>

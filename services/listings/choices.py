@@ -1,13 +1,11 @@
-category_choices = {
-  'Informática': 'Informática',
-  'Hogar': 'Hogar',
-  'Autos': 'Autos',
-  'Legal': 'Legal',
-  'Belleza': 'Belleza',
-  
-  'Otros': 'Otros',
-  
-  }
+CATEGORY_CHOICES = [
+        ('Hogar', 'Hogar'),
+        ('Legal', 'Legal'),
+        ('Informatica', 'Informatica'),
+        ('Belleza', 'Belleza'),
+        ('Autos', 'Autos'),
+        ('Otros', 'Otros'),
+    ]
 
    #, Hogar, Autos, Legal, Belleza.
 

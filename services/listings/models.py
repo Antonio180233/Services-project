@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 from Core.models import User
-
+from listings.choices import CATEGORY_CHOICES
 from django.core.validators import  MinValueValidator
 
 
@@ -9,13 +9,11 @@ from django.core.validators import  MinValueValidator
 
 
 class Listing(models.Model):
-
-
+ 
+  #modelos de las publicaciones
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    category = models.CharField(max_length=15)
-
-        
+    category = models.CharField(max_length=15, choices=CATEGORY_CHOICES)    #Categoria de la publicacion, son predefinidas, se pueden agregar mas en choices.py    
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)

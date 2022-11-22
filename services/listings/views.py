@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Listing, Comment
 from django.core.paginator import Paginator, EmptyPage
-from .choices import price_choices, category_choices
+from .choices import price_choices, CATEGORY_CHOICES
 from django.contrib.auth.decorators import login_required
 from .forms import ListingForm, UpdateForm, CommentForm
 from django.views.generic import CreateView
@@ -84,14 +84,14 @@ def search(request):
     if 'category' in request.GET:
         keywords = request.GET['category']
         if keywords:
-            query_set = query_set.filter(description__iexact=category_choices)
+            query_set = query_set.filter(description__iexact=CATEGORY_CHOICES[int(keywords)][1])
     if 'price' in request.GET:
         keywords = request.GET['price']
         if keywords:
             query_set = query_set.filter(description__iexact=price_choices)
     context ={
       'query_set': query_set,
-      'category_choices': category_choices,
+      'category_choices': CATEGORY_CHOICES,
      'price_choices': price_choices,
      'values': request.GET
            }
