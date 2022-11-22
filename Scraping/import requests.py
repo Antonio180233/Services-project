@@ -12,7 +12,11 @@ options.headless = True
 
 #Pagina donde se esta sacando información
 driver = webdriver.Chrome(path)
-driver.get('https://ciudadjuarez.locanto.com.mx/Autos/902/')
+driver.get('https://ciudadjuarez.locanto.com.mx/Hogar-y-jardin/G/')
+#https://ciudadjuarez.locanto.com.mx/Legal-consultoria/602
+#https://ciudadjuarez.locanto.com.mx/Salud-belleza/508/
+#https://ciudadjuarez.locanto.com.mx/Computadoras-y-perifericos/403/
+#https://ciudadjuarez.locanto.com.mx/Autos/902/
 
 #Elementos que se sacan de la pagina
 servicios_title = driver.find_elements(By.XPATH,"//h3[@class='bp_ad__title']") 
