@@ -141,7 +141,7 @@
           </div>
         </div>
         <div class="col-md-3">
-          <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
+          <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Solicitar</button>
           <br>
           {%if request.user.is_authenticated%}
             <form action="{%url 'listing' listing.id%}" method="POST">
@@ -160,8 +160,16 @@
             <form action="{%url 'listing' listing.id%}" method="POST">
               {%csrf_token%}
               <div style="display: flex;">
-                <input  name="my_rating" required placeholder="valor de 1-10" class="form-control">
+                <select  name="my_rating" required placeholder="valor de 1-5" class="form-control">
+                  <option value="1">1.Mal servicio</option>
+                   <option value="2">2.Muy insatisfecho</option> 
+                   <option value="3">3.Servicio decente </option> 
+                   <option value="4">4.Servicio satisfactorio</option> 
+                   <option value="5">5.Servicio espectacular</option> 
+                               
+                </select>
                 <button class="btn btn-primary" type="submit">Calificar</button>
+                
               </div>
           {%else%}
               {%if request.user.is_authenticated%}
@@ -178,10 +186,10 @@
     <div class="row mb-5">
       <div class="col-md-12">
         <h2>Comentarios...</h2>
-        <form action="{%url 'comment' listing.id%}" method="POST">
+        <form action="{% url 'comment' listing.id %}" method="POST">
           {%csrf_token%}
           <input type="hidden"  name="comentario"  class="form-control">
-          <button class="btn btn-primary" type="submit">Comentar</button>
+          <button class="btn btn-primary" type="submit" align="right">Comentar</button>
         </form>
         <br/><br/>
         {% if not listing.comments.all %}
@@ -201,7 +209,6 @@
       </div>
     </div>
   </section>
-  
     <!-- cambiar por plugin de pagos-->
   <!-- Inquiry Modal -->
   <div class="modal fade" id="inquiryModal" role="dialog">

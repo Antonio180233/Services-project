@@ -2,16 +2,26 @@ from django.db import models
 from datetime import datetime
 from Core.models import User
 
+from django.core.validators import  MinValueValidator
+
+
+
+
+
 class Listing(models.Model):
+
+
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    category = models.CharField(max_length=100)
+    category = models.CharField(max_length=15)
+
+        
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     zipcode = models.CharField(max_length=20)
     description = models.TextField(blank=True)
-    price = models.IntegerField(default=100)
+    price = models.PositiveIntegerField(validators=[MinValueValidator(100),  ], default=100)
     total_rating = models.IntegerField(null=True)
     no_of_rating = models.IntegerField(null=True)
 

@@ -4,7 +4,7 @@ from .models import Listing, Comment
 from django.core.paginator import Paginator, EmptyPage
 from .choices import price_choices, category_choices
 from django.contrib.auth.decorators import login_required
-from .forms import ListingForm, UpdateForm, commentForm
+from .forms import ListingForm, UpdateForm, CommentForm
 from django.views.generic import CreateView
 
 def listings(request):
@@ -42,16 +42,16 @@ def listing(request, pk):
 
             if 'my_rating' in request.POST:
                 my_rating = request.POST['my_rating']
-                if int(my_rating)>10 or int(my_rating<0):
+                if int(my_rating)>10 or int(my_rating) <0:
                     messages.error(request,'Ingresar un valor de 0 a 10')
-                elif str(pk) not in rate_listing:
+                elif (str(pk)) not in rate_listing:
                     if listing.total_rating:
                         listing.total_rating += int(request.POST['my_rating'])
                         listing.no_of_rating += 1
                     else:
                         listing.total_rating = int(request.POST['my_rating'])
                         listing.no_of_rating = 1
-                    rate_listing.append(str(pk))
+                    rate_listing.append (str(pk))
                     request.user.rate_listing = ','.join(rate_listing)
                     request.user.save()
                     listing.save()
@@ -107,7 +107,8 @@ def create(request):
             new.save()
             return redirect('dashboard')
         else:
-            pass
+            return render(request, 'listings/create.html', {'form': form})
+            
     else:
         return render(request,'listings/create.html',{'form': ListingForm()})
 
@@ -142,11 +143,11 @@ def delete_listing(request, pk):
 def comments(request,pk):
     listing = get_object_or_404(Comment,pk=pk)
     context = {
-        'form': commentForm(instance=listing),
+        'form': CommentForm(instance=listing),
         'pk':pk
     }
     if request.method == 'POST':
-        form = commentForm(request.POST,instance=listing)
+        form = CommentForm(request.POST,instance=listing)
         print(form)
         if form.is_valid():
             form.save()

@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'listings',
     'accounts',
     'inquiry',
+   
+  
 
     'crispy_forms',
     'django.contrib.sites',
@@ -57,6 +59,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     #'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
+
+     'multiselectfield',
 ]
 
 MIDDLEWARE = [

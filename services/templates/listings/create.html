@@ -2,26 +2,34 @@
 {% block title %} Create {% endblock %}
 {% block content %}
 {% load crispy_forms_tags %}
-<div class="container">
+<div class="container" align="center">
     <h1>
         {%if update %}
         Actualizar publicación
         {% else %}
         
-        Create
+       Ajusta tu publicación
         {% endif %}
+       
     </h1>
     {% if update %}
-        <form action="{% url 'update' pk%}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'update' pk %}" method="POST" enctype="multipart/form-data">
     {% else %}
-        <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data" align="center">
+
     {% endif %}
         {% csrf_token %}
         {{ form|crispy }}
+        
         {%if update %}
         <button class="btn btn-primary" type="submit">Actualizar</button> 
         {% else %}
-        <button class="btn btn-primary" type="submit">Create</button> 
+        <button class="btn btn-primary" type="submit">Publicar</button> 
+        <button class="btn btn-warning" type="reset">Comenzar de nuevo</button>
+        <a class="btn btn-danger" href="{% url 'dashboard' %}">Cancelar</a>
+        <br>
+        <br>
+        
         {% endif %}
     </form>
 </div>
