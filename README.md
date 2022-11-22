@@ -13,3 +13,9 @@ Project about listing services, filtering, using a recommendation system.
  5-Done, now just fix the app by using python manage.py runserver 
 
 Link Pagina https://prueba-servicios.azurewebsites.net/
+
+
+
+#los filtros no jalan y no se porque, alguien arreglelo
+
+1- arregle lo de validar que las opciones sean solo las predefinidas por categoria
