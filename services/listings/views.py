@@ -6,6 +6,10 @@ from .choices import price_choices, CATEGORY_CHOICES
 from django.contrib.auth.decorators import login_required
 from .forms import ListingForm, UpdateForm, CommentForm
 from django.views.generic import CreateView
+import stripe
+
+stripe.api_key = 'sk_test_51M722HEmvdjHcKzKsiZ5cLtZgJVy90biMhqa2UVKRHEJ3dmFioNvJHM1rOtLcmn8DEccclvvzBSf3hDXAMxR5TdT007M0Cbquu'
+
 
 def listings(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)
@@ -158,20 +162,20 @@ def comments(request,pk):
             #return render(request,'listings/comment.html',context)
             return Comment.objects.filter(body=listing).all()
 
-""""
 @login_required
-def comments(request,pk):
-    listing = get_object_or_404(Comment,pk=pk)
-    context = {
-        'form': CommentForm(instance=listing),
-        'pk':pk
-    }
-    if request.method == 'POST':
-        form = CommentForm(request.POST,instance=listing)
-        print(form)
-        if form.is_valid():
-            form.save()
-            return redirect('listings')
-        else:
-            return render(request,'listings/comment.html',context)
-"""
+def payments(request,pk):
+    return redirect( 'payment')  
+
+#Listing view
+#Listing listing.html las dos secciones de pagos
+#Listing urls
+#Settings services estan las claves
+#https://www.youtube.com/watch?v=GVjbBxgA3xA estoy siguiendo este tutorial
+
+#No detecta la vista 
+#https://dashboard.stripe.com/test/developers stripe
+
+#diamondsoftwaresolutions4@gmail.com
+#Pass: 123AsdZxc!.
+
+#doc de stripe https://stripe.com/docs/payments/quickstart?client=html

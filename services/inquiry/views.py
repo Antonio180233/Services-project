@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import inquiry
 from django.core.mail import send_mail
 
+
 def inquirys(request):
     if request.method == 'POST':
         listing_id = request.POST['listing_id']
@@ -31,4 +32,6 @@ def inquirys(request):
                 fail_silently=False
             )
             messages.success(request, "Tu solicitud ha sido enviada al proveedor, obtendras una respuesta pronto")
+          
             return redirect('/listings/'+listing_id+'/')
+

@@ -179,6 +179,12 @@
             {%endif%}
             </form>
           {%endif%}
+<!--pagos-->
+          {%if request.user.is_authenticated%}
+            <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#pagos">pagar</button>
+          {%else%}
+            Debes iniciar sesion para realizar un pago
+          {%endif%}
         </div>
       </div>
     </div>
@@ -210,6 +216,42 @@
     </div>
   </section>
     <!-- cambiar por plugin de pagos-->
+
+
+
+    <div class="modal fade" id="pagos" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pagosLabel">Realizar pago</h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+
+            <form action="{% url 'payment' listing.id%}" method="POST">
+              {% csrf_token %}
+              {% if user.is_authenticated %}
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+              {%else%}
+                <input type="hidden" name="user_id" value="0">
+              {%endif%}
+  
+              <input type="submit" value="Send" class="btn btn-block btn-secondary">
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
   <!-- Inquiry Modal -->
   <div class="modal fade" id="inquiryModal" role="dialog">
     <div class="modal-dialog">
