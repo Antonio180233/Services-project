@@ -141,6 +141,26 @@ def delete_listing(request, pk):
 
 @login_required
 def comments(request,pk):
+    listing = get_object_or_404(Listing,pk=pk)
+    #listing = Comment.objects.all(pk=pk)
+    context = {
+        'form': CommentForm(instance=listing),
+        'pk':pk
+    }
+    if request.method == 'POST':
+        form = CommentForm(request.POST,instance=listing)
+        #form = CommentForm(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('listings')
+        else:
+            #return render(request,'listings/comment.html',context)
+            return Comment.objects.filter(body=listing).all()
+
+""""
+@login_required
+def comments(request,pk):
     listing = get_object_or_404(Comment,pk=pk)
     context = {
         'form': CommentForm(instance=listing),
@@ -154,3 +174,4 @@ def comments(request,pk):
             return redirect('listings')
         else:
             return render(request,'listings/comment.html',context)
+"""
