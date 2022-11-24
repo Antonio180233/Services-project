@@ -18,3 +18,6 @@ class listings():
 
     list_date es la fecha de creacion del anuncio, en este caso se usa la fecha actual por default
     """
+    
+    
+   #funcion realizada por Jared Gonzalez
