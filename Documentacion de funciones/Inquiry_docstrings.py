@@ -17,3 +17,5 @@ def inquirys(request):
         su servicio esta siendo solicitado.
         
     """
+      
+    #Funcion realizada por Jared Gonzalez
