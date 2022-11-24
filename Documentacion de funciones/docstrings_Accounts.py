@@ -22,12 +22,14 @@ def register(request):
     para comenzar a buscar servicios    
     
 """
+     #funcion realizada por Alexis Garcia
 
 def confirmregister(request):
     """
     Funcion que se encarga de verificar la cuenta del usuario, para poder iniciar sesion en la aplicacion
     context es un diccionario que contiene los datos del usuario que se esta registrando
     """
+      #funcion realizada por Alexis Garcia
 def userlogin(request):
     """
     Funcion que se encarga de iniciar sesion al usuario, para poder acceder a la aplicacion
@@ -36,13 +38,14 @@ def userlogin(request):
     si el usuario ingresa mal nombre o contraseña, se le notifica al usuario que el nombre o la contraseña son incorrectos
 
     """
+      #Funcion realizada por Antonio Hernandez
     
 def userlogout(request):
     """
     el parametro request es un objeto para acceder a los datos de la peticion que se esta haciendo al servidor
     Funcion que se encarga de cerrar sesion al usuario, para poder salir de la aplicacion
     """
-
+     #Funcion realizada por Antonio Hernandez
      
     
     
