@@ -1,5 +1,6 @@
 #Models
 
+#modelos creados por Alexis Garcia
 class userManager(BaseUserManager):
     """
         Esta clase define las funciones para la administracion de usuarios como los son la creacion de un usuario regular
