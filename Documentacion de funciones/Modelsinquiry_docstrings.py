@@ -15,3 +15,5 @@ class inquiry(models.Model):
     owner_id: ID del dueño de la publicacion 
     
     """
+          
+     #modelo realizado por Jared Gonzalez
