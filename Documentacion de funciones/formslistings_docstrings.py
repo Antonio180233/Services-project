@@ -3,7 +3,7 @@ class listingForm():
 
     """
     esta clase se encarga de crear un formulario con los campos ['title', 'category', 'description', 'price', 'address', 'photo_main', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'photo_6',
-                    ] 
+                    ]
     """
 
     #clase creada por Antonio Hernandez
@@ -27,5 +27,3 @@ class CommentForm():
     """
 
     #clase creada por Alexis Garcia
-   
-   #Los formularios son proveidos por crispy forms
